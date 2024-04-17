@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import Loader from "../Loader/Loader.jsx";
+import ImageGallery from "../ImageGallery/ImageGallery.jsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.jsx";
+import ImageModal from "../ImageModal/ImageModal.jsx";
 import { fetchImg } from "../api.js";
 import css from './App.module.css'
-import { useEffect } from "react";
+
+
 
 
 
@@ -14,32 +17,62 @@ export default function App() {
   const [imgData, setImgData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
+  const [page, setPage] = useState(1)
+  const [query, setQuery] = useState(``)
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [currantImg, setCurrantImg] = useState(false);
 
-  const handleSearch = async (newSearchText) => {
-    try {
-        if (newSearchText === ``) {
+  function openModal(imgOnClick) {
+setCurrantImg(imgOnClick)
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+
+  const handleLoadMore = () => {
+    setPage(page + 1)
+  }
+
+  const handleSearch = (newSearchText) => {
+    setQuery(newSearchText)
+    setPage(1)
+    setImgData([])
+  }
+
+
+  useEffect(() => {
+  if (query === ``) {
         return
       }
+  async function findImg() {
+    try {
       setIsLoading(true)
-      const data = await fetchImg(newSearchText)
-      setImgData(data)
-      console.log(data);
-    // пришел массив с 10 обьектами
+      const data = await fetchImg(query, page)
+      setImgData(prevImg => {
+        return [...prevImg, ...data]
+      })
+    // пришел массив с 6 обьектами
       } catch (error) {
         setIsError(true)
       } finally {
-        setIsLoading(false)
+      setIsLoading(false)
+      
       }
   }
-
+  findImg()
+}, [query, page]);
 
   return (
     <>
       <SearchBar onSearch={handleSearch}></SearchBar>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {}
+      {imgData.length > 0 && <ImageGallery images={imgData} onOpenModal={openModal}></ImageGallery>}
+      {imgData.length > 0 && <LoadMoreBtn onClick={handleLoadMore}></LoadMoreBtn>}
+      {modalIsOpen && <ImageModal onOpenModal={openModal} onCloseModal={closeModal} currantImg={currantImg} ></ImageModal>}
     </>
   )
 }
-
