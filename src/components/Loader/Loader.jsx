@@ -1,16 +1,15 @@
-import { MagnifyingGlass } from 'react-loader-spinner'
+import { Vortex } from 'react-loader-spinner'
 
 export default function Loader() {
     return (
-        <MagnifyingGlass
+        <Vortex
   visible={true}
   height="80"
   width="80"
-  ariaLabel="magnifying-glass-loading"
+  ariaLabel="vortex-loading"
   wrapperStyle={{}}
-  wrapperClass="magnifying-glass-wrapper"
-  glassColor="#c0efff"
-  color="black"
+  wrapperClass="vortex-wrapper"
+  colors={['red', 'pink', 'lightblue', 'yellow', 'orange', 'purple']}
   />
     )
  }

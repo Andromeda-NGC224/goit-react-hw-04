@@ -1,4 +1,5 @@
 import Modal from 'react-modal';
+import css from './ImageModal.module.css'
 
 export default function ImageModal({ currantImg, onCloseModal, onOpenModal }) { 
 
@@ -12,8 +13,6 @@ export default function ImageModal({ currantImg, onCloseModal, onOpenModal }) {
       backgroundColor: 'rgba(0, 0, 0, 0.75)'
     },
         content: {
-            maxWidth: `90vw`,
-    maxHeight: '90wh',
     padding: `none`,
     border: `none`,
     top: '50%',
@@ -28,10 +27,10 @@ export default function ImageModal({ currantImg, onCloseModal, onOpenModal }) {
     return (
         <Modal  isOpen={onOpenModal} onRequestClose={onCloseModal}
             style={customStyles}
-        >
-         <img  style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
+      >
+        <img  style={{
+            maxWidth: `95vw`,
+    maxHeight: '95vh',
             objectFit: 'contain',
           }} src={currantImg.urls.regular} alt={currantImg.slug} />
         </Modal>

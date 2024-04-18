@@ -66,13 +66,13 @@ setCurrantImg(imgOnClick)
 }, [query, page]);
 
   return (
-    <>
+    <div className={css.appContainer}>
       <SearchBar onSearch={handleSearch}></SearchBar>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {imgData.length > 0 && <ImageGallery images={imgData} onOpenModal={openModal}></ImageGallery>}
       {imgData.length > 0 && <LoadMoreBtn onClick={handleLoadMore}></LoadMoreBtn>}
       {modalIsOpen && <ImageModal onOpenModal={openModal} onCloseModal={closeModal} currantImg={currantImg} ></ImageModal>}
-    </>
+    </div>
   )
 }
