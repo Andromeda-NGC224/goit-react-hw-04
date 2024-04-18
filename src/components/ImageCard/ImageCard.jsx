@@ -1,12 +1,12 @@
 
 import css from './ImageCard.module.css'
 
-export default function ImageCard({ image }) {
+export default function ImageCard({ image, onClick }) {
 
 
     return (
         <div   className={css.cardCont}>
-            <img className={css.cardImg} src={image.urls.small} alt={image.slug} />
+            <img onClick={()=> onClick(image)} className={css.cardImg} src={image.urls.small} alt={image.alt_description} />
 		</div>
     )
 }

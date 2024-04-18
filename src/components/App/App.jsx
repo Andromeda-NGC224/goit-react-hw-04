@@ -20,14 +20,15 @@ export default function App() {
   const [page, setPage] = useState(1)
   const [query, setQuery] = useState(``)
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [currantImg, setCurrantImg] = useState(false);
+  const [currantImg, setCurrantImg] = useState(null);
 
   function openModal(imgOnClick) {
-setCurrantImg(imgOnClick)
+    setCurrantImg(imgOnClick)
     setIsOpen(true);
   }
 
   function closeModal() {
+    setCurrantImg(null)
     setIsOpen(false);
   }
 
@@ -72,7 +73,7 @@ setCurrantImg(imgOnClick)
       {isError && <ErrorMessage />}
       {imgData.length > 0 && <ImageGallery images={imgData} onOpenModal={openModal}></ImageGallery>}
       {imgData.length > 0 && <LoadMoreBtn onClick={handleLoadMore}></LoadMoreBtn>}
-      {modalIsOpen && <ImageModal onOpenModal={openModal} onCloseModal={closeModal} currantImg={currantImg} ></ImageModal>}
+      {modalIsOpen && <ImageModal isOpen={modalIsOpen} onCloseModal={closeModal} image={currantImg}></ImageModal>}
     </div>
   )
 }

@@ -1,7 +1,12 @@
-import Modal from 'react-modal';
-import css from './ImageModal.module.css'
 
-export default function ImageModal({ currantImg, onCloseModal, onOpenModal }) { 
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
+
+
+export default function ImageModal({ image: { urls: { regular }, alt_description }, onCloseModal, isOpen }) { 
+
+
 
     const customStyles = {
         overlay: {
@@ -12,7 +17,7 @@ export default function ImageModal({ currantImg, onCloseModal, onOpenModal }) {
       bottom: 0,
       backgroundColor: 'rgba(0, 0, 0, 0.75)'
     },
-        content: {
+      content: {
     padding: `none`,
     border: `none`,
     top: '50%',
@@ -25,14 +30,14 @@ export default function ImageModal({ currantImg, onCloseModal, onOpenModal }) {
   }};
     
     return (
-        <Modal  isOpen={onOpenModal} onRequestClose={onCloseModal}
+        <Modal  isOpen={isOpen} onRequestClose={onCloseModal}
             style={customStyles}
       >
         <img  style={{
-            maxWidth: `95vw`,
-    maxHeight: '95vh',
-            objectFit: 'contain',
-          }} src={currantImg.urls.regular} alt={currantImg.slug} />
+          maxWidth: `95vw`,
+          maxHeight: '95vh',
+          objectFit: 'contain',
+          }} src={regular} alt={alt_description} />
         </Modal>
     )
 } 
