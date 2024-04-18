@@ -16,7 +16,7 @@ export default function SearchBar({ onSearch }) {
     return (
     <header className={css.header}>
         <form className={css.form} onSubmit={handleSubmit}>
-            <input className={css.input} type="text" name="searchInput" autoComplete="off" />
+            <input className={css.input} type="text" name="searchInput" autoComplete="off" placeholder="Search images..." />
             <button className={css.btn} type="submit"><IoSearch size={26} className={css.iconSearch} /></button>
         </form>
     </header>

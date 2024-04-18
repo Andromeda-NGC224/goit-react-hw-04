@@ -31,6 +31,12 @@
   border: none;
   outline: none;
 }
+.input::placeholder {
+  transition: color 0.3s ease;
+}
+.input:focus::placeholder {
+  color: transparent;
+}
 .btn {
   border: none;
   cursor: pointer;
